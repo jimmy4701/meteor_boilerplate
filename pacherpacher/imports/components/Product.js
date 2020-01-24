@@ -1,5 +1,5 @@
-import React from 'react'
-import { Card } from 'semantic-ui-react'
+import React, {Fragment} from 'react'
+import { Card, Button } from 'semantic-ui-react'
 
 function Product({product, ...props}){
     return(
@@ -8,6 +8,14 @@ function Product({product, ...props}){
             description={product.description}
             meta={product.price}
             image={product.image_url}
+            extra={
+                <Fragment>
+                    <Button fluid>Acheter</Button>
+                    {product.seller == Meteor.userId() &&
+                        <Button fluid color="red">Supprimer</Button>
+                    }
+                </Fragment>
+            }
         />
     )
 }
