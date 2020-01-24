@@ -7,6 +7,7 @@ Meteor.methods({
         if(!this.userId){
             throw new Meteor.Error('402', "Piiiirate !")
         }
+        product.seller = this.userId
         const product_id = Products.insert(product)
         return Products.findOne({_id: product_id})
     }
