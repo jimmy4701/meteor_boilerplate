@@ -2,6 +2,11 @@ import React, {Fragment} from 'react'
 import { Card, Button } from 'semantic-ui-react'
 
 function Product({product, ...props}){
+
+    const remove = () => {
+        Meteor.call('products.remove', product._id)
+    }
+
     return(
         <Card 
             header={product.name} 
@@ -12,7 +17,7 @@ function Product({product, ...props}){
                 <Fragment>
                     <Button fluid>Acheter</Button>
                     {product.seller == Meteor.userId() &&
-                        <Button fluid color="red">Supprimer</Button>
+                        <Button fluid onClick={remove} color="red">Supprimer</Button>
                     }
                 </Fragment>
             }
