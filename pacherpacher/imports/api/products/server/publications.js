@@ -6,3 +6,7 @@ Meteor.publish('products.me', function(){
     return Products.find({seller: this.userId})
 })
 
+Meteor.publish('products.by_user', function(user_id){
+    return Products.find({seller: user_id})
+})
+
