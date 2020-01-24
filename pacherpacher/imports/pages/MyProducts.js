@@ -13,7 +13,7 @@ function MyProducts(props){
                 <Button color="green" icon="plus" content="Ajouter produit" />
             </Link>
             {!props.loading && props.products.map(product => {
-                return <Product product={product} />
+                return <Product key={product._id} product={product} />
             })}
         </Container>
     )
