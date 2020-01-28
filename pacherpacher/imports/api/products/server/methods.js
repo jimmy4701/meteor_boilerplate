@@ -30,5 +30,11 @@ Meteor.methods({
     },
     'products.by_id': function(product_id){
         return Products.findOne({_id: product_id, seller: this.userId})
+    },
+    'products.add_to_cart': function(product_id){
+        Meteor.users.update(
+            {_id: this.userId},
+            {$push: {'profile.cart': product_id}}
+        )
     }
 })

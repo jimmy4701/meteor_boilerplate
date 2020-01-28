@@ -1,6 +1,7 @@
 import React, {Fragment, useState} from 'react'
 import { Card, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 
 function Product({product, ...props}){
@@ -8,6 +9,16 @@ function Product({product, ...props}){
 
     const remove = () => {
         Meteor.call('products.remove', product._id)
+    }
+
+    const add_to_cart = () => {
+        Meteor.call('products.add_to_cart', product._id, (err) => {
+            if(err){
+                toast.error(err.message)
+            }else{
+                toast.success("Produit ajouté au panier")
+            }
+        })
     }
 
     return(
@@ -19,7 +30,7 @@ function Product({product, ...props}){
             image={product.image_url}
             extra={
                 <Fragment>
-                    <Button fluid>Acheter</Button>
+                    <Button fluid onClick={add_to_cart}>Acheter</Button>
                     {product.seller == Meteor.userId() &&
                         <Fragment>
                             <Link to={`/edit_product/${product._id}`}>
