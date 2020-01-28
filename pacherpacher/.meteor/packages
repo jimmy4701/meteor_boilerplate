@@ -21,3 +21,4 @@ accounts-password
 constellation:console
 react-meteor-data
 aldeed:collection2@3.0.0
+percolate:migrations
