@@ -21,6 +21,16 @@ function Product({product, ...props}){
         })
     }
 
+    const remove_from_cart = () => {
+        Meteor.call('products.remove_from_cart', product._id, (err) => {
+            if(err){
+                toast.error(err.message)
+            }else{
+                toast.success("Produit retiré du panier")
+            }
+        })
+    }
+
     return(
         <Card 
             {...props}
@@ -31,6 +41,7 @@ function Product({product, ...props}){
             extra={
                 <Fragment>
                     <Button fluid onClick={add_to_cart}>Acheter</Button>
+                    <Button fluid onClick={remove_from_cart}>Retirer du panier</Button>
                     {product.seller == Meteor.userId() &&
                         <Fragment>
                             <Link to={`/edit_product/${product._id}`}>

@@ -36,5 +36,10 @@ Meteor.methods({
             {_id: this.userId},
             {$push: {'profile.cart': product_id}}
         )
+    },
+    'products.remove_from_cart': function(product_id){
+        const user = Meteor.users.findOne({_id: this.userId})
+        user.profile.cart = user.profile.cart.filter(id => id != product_id)
+        Meteor.users.update({_id: this.userId}, {$set: user})
     }
 })
