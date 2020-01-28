@@ -3,11 +3,12 @@ import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { withTracker } from 'meteor/react-meteor-data'
 
-function Navbar({user}){
+function Navbar({user, cart}){
+
     return(
         <Menu>
-            {user && user.profile.cart && user.profile.cart.length > 0 &&
-                <Menu.Item>{user.profile.cart.length} produits</Menu.Item>
+            {user && cart.length > 0 &&
+                <Menu.Item>{cart.length} produits</Menu.Item>
             }
             <Link to="/admin/users">
                 <Menu.Item>Utilisateurs</Menu.Item>
@@ -32,8 +33,10 @@ function Navbar({user}){
 }
 
 export default withTracker(() => {
-    console.log(Meteor.user())
+    
+    const user = Meteor.user()
     return {
-        user: Meteor.user()
+        user,
+        cart: user && user.profile.cart
     }
 })(Navbar)
