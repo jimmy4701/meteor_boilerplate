@@ -12,7 +12,10 @@ function Signup(props){
         console.log('SIGNUP', email, password)
         Accounts.createUser({
             email,
-            password
+            password,
+            profile: {
+                cart: []
+            }
         }, (err) => {
             if(err){
                 alert(err.message)
