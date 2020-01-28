@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Button, Form } from 'semantic-ui-react'
+import { toast } from 'react-toastify'
 
 function ProductForm(props){
     const [product, setProduct] = useState({})
@@ -13,9 +14,9 @@ function ProductForm(props){
             // Update product
             Meteor.call('products.update', product, (err, data) => {
                 if(err){
-                    alert(err.message)
+                    toast.error(err.message)
                 }else{
-                    alert(`Produit ${product.name} modifié`)
+                    toast.success(`Produit ${product.name} modifié`)
                     console.log(data)
                 }
             })
@@ -23,9 +24,9 @@ function ProductForm(props){
             // Create product
             Meteor.call('products.create', product, (err, data) => {
                 if(err){
-                    alert(err.message)
+                    toast.error(err.message)
                 }else{
-                    alert('Produit créé')
+                    toast.success('Produit créé')
                     console.log(data)
                 }
             })

@@ -6,6 +6,8 @@ import {
     Route
 } from 'react-router-dom'
 import Navbar from '/imports/components/Navbar'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function App(props){
     return(
@@ -14,6 +16,7 @@ function App(props){
             <Switch>
                 <Route path="/" component={MainLayout} />
             </Switch>
+            <ToastContainer />
         </BrowserRouter>
     )
 }
